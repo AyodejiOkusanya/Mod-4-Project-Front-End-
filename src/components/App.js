@@ -25,11 +25,17 @@ class App extends React.Component {
   selectAVideo = (event, newVideo) => {
     //   console.log('here')
     
-    this.setState({ selectedVideo: newVideo })
+    this.getYouTubeVideos(newVideo.title)
   }
 
-  getYouTubeVideos = () => {
-    
+  getYouTubeVideos = (searchTerm) => {
+    console.log('clicked')
+    searchTerm = (searchTerm + ' trailer').split(' ').join('+')
+    const YOUTUBE = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchTerm}+&key=AIzaSyCvd5ISDIyQ1if06rQ7NC1fvPuqi3zUhlY`
+    return fetch(YOUTUBE)
+      .then(resp => resp.json())
+      // .then(console.log)
+      .then(obj => this.setState({ selectedVideo: obj.items[0] }))
   }
 
   searchForVideo = (event) => {
