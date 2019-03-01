@@ -7,18 +7,19 @@ class App extends React.Component {
   state = {
     videos: [],
     selectedVideo: null,
-    searchTerm: 'marvel'
+    searchTerm: 'movies'
   }
   componentDidMount () {
-    const searchTerm = 'movies'
-    this.getVideos(searchTerm)
+    this.getVideos(this.state.searchTerm)
   }
 
   getVideos = (searchTerm) => {
-    const YOUTUBE = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchTerm}+&key=AIzaSyCvd5ISDIyQ1if06rQ7NC1fvPuqi3zUhlY`
-    return fetch(YOUTUBE)
+    const searchWords = searchTerm.split(' ').join('%20') + '&'
+    const TMDB = `https://api.themoviedb.org/3/search/movie?api_key=7193c06322efdacd20e49cb9cdebb301&language=en-US&query=${searchWords}page=1&include_adult=false`
+    return fetch(TMDB)
       .then(resp => resp.json())
-      .then(videos => this.setState({ videos }))
+      .then(obj => this.setState({videos: obj.results}))
+      // .then(videos => this.setState({ videos }))
   }
 
   selectAVideo = (event, newVideo) => {
@@ -40,7 +41,7 @@ class App extends React.Component {
 
   render () {
     return (
-      <div>
+      <div style={{backgroundColor:"black"}}>
         <SearchBar searchForVideo={this.searchForVideo} handleSearchSubmit={this.handleSearchSubmit}/>
         {this.state.selectedVideo ? (
           <MainVideo video={this.state.selectedVideo} />

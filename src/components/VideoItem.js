@@ -3,6 +3,7 @@ import React from 'react'
 class VideoItem extends React.Component {
     render () {
         const video = this.props.video
+        const baseImgURL = 'http://image.tmdb.org/t/p/w185'
     return (
     //   <div className='video-item item' onClick={(event, video) => this.props.selectAVideo(event,this.video)}>
     //     <img
@@ -20,15 +21,15 @@ class VideoItem extends React.Component {
     //   </div>
 
       
-        <div class='column' onClick={(event, newVideo) => this.props.selectAVideo(event, video)}>
-          <div class='ui segment'>
+        <div className='column' onClick={(event, newVideo) => this.props.selectAVideo(event, video)}>
+          <div className='ui segment'>
             <img
-              alt={video.snippet.title}
+              alt={video.title}
               className='ui image'
               src={
-                video.snippet.thumbnails
-                  ? video.snippet.thumbnails.medium.url
-                  : console.log('no thumbbail')
+                video.poster_path
+                  ? baseImgURL + video.poster_path
+                  : require('../movie_trailer_default.jpeg')
               }
             />
           </div>

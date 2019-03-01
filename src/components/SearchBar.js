@@ -7,18 +7,18 @@ class SearchBar extends React.Component {
 
   render () {
     return (
-      <div class='ui search'>
-        <div class='ui icon input'>
+      <div className='ui search'>
+        <div className='ui icon input'>
           <input
-            class='prompt'
+            className='prompt'
             type='text'
             placeholder='Enter a movie'
             onChange={this.handleSearch}
             onClick={this.props.handleSearchSubmit}
           />
-          <i class='search icon' />
+          <i className='search icon' />
         </div>
-        <div class='results' />
+        <div className='results' />
       </div>
     )
   }
