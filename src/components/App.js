@@ -24,7 +24,12 @@ class App extends React.Component {
 
   selectAVideo = (event, newVideo) => {
     //   console.log('here')
+    
     this.setState({ selectedVideo: newVideo })
+  }
+
+  getYouTubeVideos = () => {
+    
   }
 
   searchForVideo = (event) => {
