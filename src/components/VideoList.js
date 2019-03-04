@@ -1,22 +1,47 @@
 import React from 'react'
 import VideoItem from './VideoItem'
+import InfiniteScroll from 'react-infinite-scroller'
 
 class VideoList extends React.Component {
+
+  
   renderVideos = () => {
     // console.log(this.props.videos.items)
+    
     if (this.props.videos) {
       return this.props.videos.map(video => {
         return (
-          
-            <VideoItem video={video} selectAVideo={this.props.selectAVideo} />
-        
+          <VideoItem
+            key={video.id}
+            video={video}
+            selectAVideo={this.props.selectAVideo}
+          />
         )
       })
-    } else (console.log('no item '))
+    } else console.log('no item ')
   }
 
   render () {
-    return <div className='ui three column grid'>{this.renderVideos()}</div>
+    return (
+    
+
+
+
+    <div style= {{height:"700px overflow:auto" }} >
+    <InfiniteScroll
+        pageStart={0}
+        // initialLoad = {true}
+        loadMore={this.props.getVideosFromScroll}
+        hasMore={this.props.hasMore}
+        loader={<div className="loader" key={0}>Loading ...</div>}
+        useWindow={true}
+        // getScrollParent={() => this.scrollParentRef}
+
+    >
+        <div className='ui three column grid'>{this.renderVideos()}</div>
+     </InfiniteScroll>
+ </div>
+    )
   }
 }
 export default VideoList
