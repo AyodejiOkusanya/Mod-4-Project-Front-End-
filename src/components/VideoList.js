@@ -21,7 +21,7 @@ class VideoList extends React.Component {
 
   render () {
     return (
-      <div  style={{ height: '700px overflow:auto' }}>
+      <div  style={{ height: '700px overflow:auto'  }}>
         <InfiniteScroll
           pageStart={0}
           // initialLoad = {true}

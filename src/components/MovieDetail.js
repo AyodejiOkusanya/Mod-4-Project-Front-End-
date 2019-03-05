@@ -31,9 +31,16 @@ class MovieDetail extends React.Component {
             <a class='item'>Friends</a>
             <a class='item'>Just Movies</a>
             <a class='item'>Just Shows</a>
+            
             <div class='right item'>
               <a class='ui inverted button'>Log in</a>
               <a class='ui inverted button'>Sign Up</a>
+              <div
+            class='ui primary button'
+            onClick={this.props.handleMovieDetailClick}
+          >
+            Movie Trailer <i class='right arrow icon' />
+          </div>
             </div>
           </div>
         </div>
@@ -42,12 +49,7 @@ class MovieDetail extends React.Component {
           <div ui embed>
           </div>
          
-          <div
-            class='ui huge primary button'
-            onClick={this.props.handleMovieDetailClick}
-          >
-            Movie Trailer <i class='right arrow icon' />
-          </div>
+         
         </div>
       </div>
     )

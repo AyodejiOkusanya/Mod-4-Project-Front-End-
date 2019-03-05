@@ -23,7 +23,7 @@ class VideoItem extends React.Component {
       
         // <div className='column' onClick={(event, newVideo) => this.props.selectAVideo(event, video)}>
         //   <div className='ui segment'>
-            <div className="four wide grid column">
+            // <div className="four wide grid column">
             <img
             onClick={(event, newVideo) => this.props.selectAVideo(event, video)}
               alt={video.title}
@@ -34,7 +34,7 @@ class VideoItem extends React.Component {
                   : require('../generic-movie.jpg')
               }
             />
-         </div>
+        //  </div>
         // </div>
       
     )
