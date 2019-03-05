@@ -1,0 +1,8 @@
+#sign-in {
+    background-image: "../sign-in-background.jpg";
+    background-size: "cover";
+    background-color: 'black';
+    display: 'flex';
+    padding-top: '300px';
+    justify-content: 'center';
+}

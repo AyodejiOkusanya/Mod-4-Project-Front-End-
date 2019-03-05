@@ -3,9 +3,12 @@ import VideoList from './VideoList'
 import MainVideo from './MainVideo'
 import SearchBar from './SearchBar'
 import MovieDetail from './MovieDetail'
-import BackgroundVideo from './BackgroundVideo'
+
+
+import './App.css'
 
 class App extends React.Component {
+  
   state = {
     videos: [],
     selectedYouTubeVideo: null,
@@ -17,6 +20,8 @@ class App extends React.Component {
   }
   componentDidMount () {
     this.getVideos(this.state.searchTerm)
+
+    this.setState({selectedYouTubeVideo: {id: {videoId: "0LHxvxdRnYc"}}})
   }
 
   getVideos = searchTerm => {
@@ -72,7 +77,7 @@ class App extends React.Component {
   searchForVideo = event => {
     //   console.log()
     this.setState({ searchTerm: event.target.value })
-    this.handleMovieDetailClick()
+    // this.handleMovieDetailClick()
   }
 
   handleMovieDetailClick = () => {
@@ -125,7 +130,10 @@ class App extends React.Component {
           getVideosFromScroll={this.getVideosFromScroll}
           hasMore={this.state.hasMore}
         />
-      </div>
+       </div>
+      // <SignInPage /> 
+
+     
     )
   }
 }
