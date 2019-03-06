@@ -3,6 +3,9 @@ import VideoList from './VideoList'
 import MainVideo from './MainVideo'
 import SearchBar from './SearchBar'
 import MovieDetail from './MovieDetail'
+import API from '../API'
+import { Route, withRouter, Switch, Link } from "react-router-dom";
+import SignInPage from './SignInPage'
 
 
 import './App.css'
@@ -16,8 +19,15 @@ class App extends React.Component {
     searchTerm: 'marvel',
     showingMovieDetail: true,
     results: [],
-    hasMore: true
+    hasMore: true,
+    username: ""
   }
+
+  signin = user => {
+    localStorage.setItem("token", user.token);
+    this.setState({ username: user.username });
+  }
+
   componentDidMount () {
     this.getVideos(this.state.searchTerm)
 
@@ -111,7 +121,9 @@ class App extends React.Component {
 
   render () {
     return (
-      <div style={{ backgroundColor: 'black' }}>
+      <Switch>
+        <Route exact path="/app" component={() =>{ 
+      return <div style={{ backgroundColor: 'black' }}>
         <SearchBar
           searchForVideo={this.searchForVideo}
           handleSearchSubmit={this.handleSearchSubmit}
@@ -130,9 +142,14 @@ class App extends React.Component {
           getVideosFromScroll={this.getVideosFromScroll}
           hasMore={this.state.hasMore}
         />
-       </div>
-      // <SignInPage /> 
-
+       </div>}} 
+       />
+       <Route exact path="/" component={routerProps => (
+        <SignInPage signin={this.signin} {...routerProps}/>
+        )} 
+        />
+      
+      </Switch>
      
     )
   }
