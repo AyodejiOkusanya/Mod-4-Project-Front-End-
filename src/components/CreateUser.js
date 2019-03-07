@@ -3,7 +3,7 @@ import { isAbsolute } from 'path';
 import { Link } from "react-router-dom";
 import API from '../API'
 
-class SignInPage extends React.Component {
+class CreateUser extends React.Component {
   state = {
     username: "",
     password: ""
@@ -18,7 +18,7 @@ class SignInPage extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault()
     const user = this.state
-    API.signin(user).then(data => {
+    API.createUser(user).then(data => {
       if (data.error) {
         alert('Incorrect Login details')
       } else {
@@ -59,7 +59,6 @@ class SignInPage extends React.Component {
               </div>
             </div>
             <Link class='ui button' to="/App" onClick={(event) => this.handleSubmit(event)} >Enter The Matrix</Link>
-            <Link class='ui button' to="/createuser" >Sign Up</Link>
             
           </form>
         </div>
@@ -68,4 +67,4 @@ class SignInPage extends React.Component {
   }
 }
 
-export default SignInPage
+export default CreateUser

@@ -52,7 +52,7 @@ class SearchBar extends React.Component {
             <a class='item'>Just Shows</a>
             
             <div class='right item'>
-              <a class='ui inverted button'>Log Out</a>
+              <a class='ui inverted button' onClick={this.props.signOut} >Log Out</a>
               {/* <div
             class='ui primary button'
             onClick={this.props.handleMovieDetailClick}
