@@ -1,17 +1,33 @@
 import React from 'react'
 import { isAbsolute } from 'path';
 import { Link } from "react-router-dom";
+import API from '../API'
 
 class SignInPage extends React.Component {
   state = {
-    username: null,
-    password: null
+    username: "",
+    password: ""
   }
 
   backgroundImage = require('../sign-in-background.jpg')
 
   handleOnChange = (event) => {
       this.setState({ [event.target.name]: event.target.value})
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
+    const user = this.state
+    API.signin(user).then(data => {
+      if (data.error) {
+        alert('Incorrect Login details')
+      } else {
+        // this.props.signin(data)
+        localStorage.setItem("token", data.token);
+        // console.log(data)
+        this.props.history.push("/app")
+      }
+    })
   }
   render () {
     return (
@@ -27,14 +43,14 @@ class SignInPage extends React.Component {
             justifyContent: 'center'
           }}
         >
-          <form class='ui form' style={{position: "absolute", top: "400px", padding:"0px"}}>
+          <form class='ui form' style={{position: "absolute", top: "400px", padding:"0px"}} >
             <div class='field'>
-              <label>First Name</label>
+              <label>Username</label>
               <input type='text' name='username' placeholder='Username' onChange={this.handleOnChange}/>
             </div>
             <div class='field'>
-              <label>Last Name</label>
-              <input type='text' name='password' placeholder='Password' onChange={this.handleOnChange}/>
+              <label>Password</label>
+              <input type='password' name='password' placeholder='Password' onChange={this.handleOnChange}/>
             </div>
             <div class='field'>
               <div class='ui checkbox'>
@@ -42,7 +58,7 @@ class SignInPage extends React.Component {
                 <label>I agree to the Terms and Conditions</label>
               </div>
             </div>
-            <Link class='ui button' type='submit' to="/App">Enter The Matrix</Link>
+            <Link class='ui button' to="/App" onClick={(event) => this.handleSubmit(event)} >Enter The Matrix</Link>
             
           </form>
         </div>

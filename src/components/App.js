@@ -28,10 +28,26 @@ class App extends React.Component {
     this.setState({ username: user.username });
   }
 
+  signout = () => {
+    localStorage.removeItem("token");
+    this.setState({ username: "" });
+  }
+
   componentDidMount () {
     this.getVideos(this.state.searchTerm)
 
     this.setState({selectedYouTubeVideo: {id: {videoId: "0LHxvxdRnYc"}}})
+    
+    API.validate().then(data => {
+      if (data.error) {
+        this.signout()
+        // console.log(this.window)
+        this.props.history.push("/")
+      } else {
+        this.signin(data)
+        this.props.history.push("/app")
+      }
+    })
   }
 
   getVideos = searchTerm => {
@@ -50,6 +66,7 @@ class App extends React.Component {
   }
 
   getVideosFromScroll = pageNumber => {
+    console.log(pageNumber)
     const searchWords = this.state.searchTerm.split(' ').join('%20') + '&'
     const TMDB = `https://api.themoviedb.org/3/search/movie?api_key=7193c06322efdacd20e49cb9cdebb301&language=en-US&query=${searchWords}page=${pageNumber}&include_adult=false`
     return fetch(TMDB)
@@ -94,11 +111,14 @@ class App extends React.Component {
     this.setState({ showingMovieDetail: !this.state.showingMovieDetail })
   }
 
-  handleSearchSubmit = event => {
+  handleSearchSubmit = (event,searchTerm) => {
     console.log('here')
     event.preventDefault()
-    const fetchSearchTerm = this.state.searchTerm.split(' ').join('+')
+    const fetchSearchTerm = searchTerm.split(' ').join('+')
     this.getVideos(fetchSearchTerm)
+    this.setState({
+      showingMovieDetail: true
+    })
   }
 
   showMovieDetailOrVideo = () => {
@@ -119,12 +139,19 @@ class App extends React.Component {
     }
   }
 
+
+
   render () {
     return (
-      <Switch>
-        <Route exact path="/app" component={() =>{ 
-      return <div style={{ backgroundColor: 'black' }}>
+      
+        
+        
+         
+        
+        
+        <div style={{ backgroundColor: 'black' }} >
         <SearchBar
+          searchTerm={this.state.searchTerm}
           searchForVideo={this.searchForVideo}
           handleSearchSubmit={this.handleSearchSubmit}
         />
@@ -142,14 +169,8 @@ class App extends React.Component {
           getVideosFromScroll={this.getVideosFromScroll}
           hasMore={this.state.hasMore}
         />
-       </div>}} 
-       />
-       <Route exact path="/" component={routerProps => (
-        <SignInPage signin={this.signin} {...routerProps}/>
-        )} 
-        />
+      </div>
       
-      </Switch>
      
     )
   }
