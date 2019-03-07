@@ -4,14 +4,13 @@ import MainVideo from './MainVideo'
 import SearchBar from './SearchBar'
 import MovieDetail from './MovieDetail'
 import API from '../API'
-import { Route, withRouter, Switch, Link } from "react-router-dom";
+import { Route, withRouter, Switch, Link } from 'react-router-dom'
 import SignInPage from './SignInPage'
 
-
 import './App.css'
+import Friends from './Friends'
 
 class App extends React.Component {
-  
   state = {
     videos: [],
     selectedYouTubeVideo: null,
@@ -20,18 +19,18 @@ class App extends React.Component {
     showingMovieDetail: true,
     results: [],
     hasMore: true,
-    username: ""
+    username: ''
   }
 
   signin = user => {
-    localStorage.setItem("token", user.token);
-    this.setState({ username: user.username });
+    localStorage.setItem('token', user.token)
+    this.setState({ username: user.username })
   }
 
   componentDidMount () {
     this.getVideos(this.state.searchTerm)
 
-    this.setState({selectedYouTubeVideo: {id: {videoId: "0LHxvxdRnYc"}}})
+    this.setState({ selectedYouTubeVideo: { id: { videoId: '0LHxvxdRnYc' } } })
   }
 
   getVideos = searchTerm => {
@@ -122,35 +121,42 @@ class App extends React.Component {
   render () {
     return (
       <Switch>
-        <Route exact path="/app" component={() =>{ 
-      return <div style={{ backgroundColor: 'black' }}>
-        <SearchBar
-          searchForVideo={this.searchForVideo}
-          handleSearchSubmit={this.handleSearchSubmit}
-        />
-        { this.showMovieDetailOrVideo() }
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        <Route
+          exact
+          path='/app'
+          component={() => {
+            return (
+              <div style={{ backgroundColor: 'black' }}>
+                <SearchBar
+                  searchForVideo={this.searchForVideo}
+                  handleSearchSubmit={this.handleSearchSubmit}
+                />
+                {this.showMovieDetailOrVideo()}
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
 
-        <VideoList
-          videos={this.state.videos}
-          selectAVideo={this.selectAVideo}
-          getVideosFromScroll={this.getVideosFromScroll}
-          hasMore={this.state.hasMore}
+                <VideoList
+                  videos={this.state.videos}
+                  selectAVideo={this.selectAVideo}
+                  getVideosFromScroll={this.getVideosFromScroll}
+                  hasMore={this.state.hasMore}
+                />
+              </div>
+            )
+          }}
         />
-       </div>}} 
-       />
-       <Route exact path="/" component={routerProps => (
-        <SignInPage signin={this.signin} {...routerProps}/>
-        )} 
+        <Route
+          exact
+          path='/'
+          component={routerProps => (
+            <SignInPage signin={this.signin} {...routerProps} />
+          )}
         />
-      
       </Switch>
-     
     )
   }
 }

@@ -18,11 +18,12 @@ class MovieDetail extends React.Component {
         class='ui inverted vertical masthead center aligned segment'
         style={{
           backgroundImage: `url(${baseImgURL + video.backdrop_path})`,
-          backgroundSize: 'cover', height: '500px'
+          backgroundSize: 'cover',
+          height: '500px'
         }}
         onClick={this.props.handleMovieDetailClick}
       >
-        <div class='ui container'>
+        {/* <div class='ui container'>
           <div class='ui large secondary inverted pointing menu'>
             <a class='toc item'>
               <i class='sidebar icon' />
@@ -31,7 +32,7 @@ class MovieDetail extends React.Component {
             <a class='item'>Friends</a>
             <a class='item'>Just Movies</a>
             <a class='item'>Just Shows</a>
-            
+
             <div class='right item'>
               <a class='ui inverted button'>Log in</a>
               <a class='ui inverted button'>Sign Up</a>
@@ -43,13 +44,21 @@ class MovieDetail extends React.Component {
           </div>
             </div>
           </div>
+        </div> */}
+
+        <div
+          class='ui primary button'
+          onClick={this.props.handleMovieDetailClick}
+        >
+          Movie Trailer <i class='right arrow icon' />
         </div>
 
         <div class='ui text container'>
           <div ui embed>
+            <h2>{video.title}</h2>
+            <p>{video.overview}</p>
+            <p> {video.release_date? `Release Date:${video.release_date}`: null}</p>
           </div>
-         
-         
         </div>
       </div>
     )
