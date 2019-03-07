@@ -20,6 +20,10 @@ class VideoList extends React.Component {
   }
 
   render () {
+    console.log("this.props.gitVids", this.props.getVideosFromScroll);
+    console.log("this.props.hasMore", this.props.hasMore);
+    
+    
     return (
       <div  style={{ height: '700px overflow:auto'  }}>
         <InfiniteScroll
