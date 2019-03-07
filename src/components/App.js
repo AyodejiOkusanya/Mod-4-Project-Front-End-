@@ -4,14 +4,13 @@ import MainVideo from './MainVideo'
 import SearchBar from './SearchBar'
 import MovieDetail from './MovieDetail'
 import API from '../API'
-import { Route, withRouter, Switch, Link } from "react-router-dom";
+import { Route, withRouter, Switch, Link } from 'react-router-dom'
 import SignInPage from './SignInPage'
 
-
 import './App.css'
+import Friends from './Friends'
 
 class App extends React.Component {
-  
   state = {
     videos: [],
     selectedYouTubeVideo: null,
@@ -20,12 +19,12 @@ class App extends React.Component {
     showingMovieDetail: true,
     results: [],
     hasMore: true,
-    username: ""
+    username: ''
   }
 
   signin = user => {
-    localStorage.setItem("token", user.token);
-    this.setState({ username: user.username });
+    localStorage.setItem('token', user.token)
+    this.setState({ username: user.username })
   }
 
   signout = () => {
@@ -35,7 +34,6 @@ class App extends React.Component {
 
   componentDidMount () {
     this.getVideos(this.state.searchTerm)
-
     this.setState({selectedYouTubeVideo: {id: {videoId: "0LHxvxdRnYc"}}})
     
     API.validate().then(data => {
@@ -48,6 +46,7 @@ class App extends React.Component {
         this.props.history.push("/app")
       }
     })
+
   }
 
   getVideos = searchTerm => {
@@ -143,12 +142,7 @@ class App extends React.Component {
 
   render () {
     return (
-      
-        
-        
-         
-        
-        
+
         <div style={{ backgroundColor: 'black' }} >
         <SearchBar
           searchTerm={this.state.searchTerm}
