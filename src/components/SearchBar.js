@@ -1,8 +1,22 @@
 import React from 'react'
 
 class SearchBar extends React.Component {
+
+  state = {
+    searchTerm: ''
+  }
+
+  handleOnChange = (event) => {
+    console.log(event.target.name, event.target.value)
+    this.setState({ [event.target.name]: event.target.value})
+}
+
   handleSearch = event => {
     this.props.searchForVideo(event)
+  }
+
+  passSearchTerm = (event) => {
+    this.props.handleSearchSubmit(event,this.state.searchTerm)
   }
 
   render () {
@@ -24,8 +38,8 @@ class SearchBar extends React.Component {
 
 
 <div className="ui inverted segment">
-      <form onChange={this.handleSearch} onSubmit={this.props.handleSearchSubmit}>
-  <input type="text" placeholder="Search..."  />
+      <form onSubmit={this.passSearchTerm}>
+  <input onChange={this.handleOnChange} value={this.state.searchTerm} type="text" placeholder="Search..."  name="searchTerm"/>
   <button className="ui button" >Search</button>
   <div class='ui container'>
           <div class='ui large secondary inverted pointing menu'>

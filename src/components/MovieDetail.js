@@ -23,6 +23,7 @@ class MovieDetail extends React.Component {
         }}
         onClick={this.props.handleMovieDetailClick}
       >
+
         {/* <div class='ui container'>
           <div class='ui large secondary inverted pointing menu'>
             <a class='toc item'>
@@ -33,6 +34,16 @@ class MovieDetail extends React.Component {
             <a class='item'>Just Movies</a>
             <a class='item'>Just Shows</a>
 
+
+        <div className='ui container'>
+          <div className='ui large secondary inverted pointing menu'>
+            <a className='toc item'>
+              <i className='sidebar icon' />
+            </a>
+            <a className='active item'>Home</a>
+            <a className='item'>Friends</a>
+            <a className='item'>Just Movies</a>
+            <a className='item'>Just Shows</a>
             <div class='right item'>
               <a class='ui inverted button'>Log in</a>
               <a class='ui inverted button'>Sign Up</a>
