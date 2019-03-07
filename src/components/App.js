@@ -19,7 +19,8 @@ class App extends React.Component {
     showingMovieDetail: true,
     results: [],
     hasMore: true,
-    username: ''
+    username: '',
+    showingFriends: false
   }
 
   signin = user => {
@@ -138,6 +139,10 @@ class App extends React.Component {
     }
   }
 
+  toggleFriends = () => {
+    this.setState({showingFriends: !this.state.showingFriends})
+  }
+
 
 
   render () {
@@ -148,6 +153,7 @@ class App extends React.Component {
           searchTerm={this.state.searchTerm}
           searchForVideo={this.searchForVideo}
           handleSearchSubmit={this.handleSearchSubmit}
+          toggleFriends={this.toggleFriends}
         />
         { this.showMovieDetailOrVideo() }
         <br />
@@ -156,7 +162,7 @@ class App extends React.Component {
         <br />
         <br />
         <br />
-
+        {this.state.showingFriends ? <Friends /> : null}
         <VideoList
           videos={this.state.videos}
           selectAVideo={this.selectAVideo}

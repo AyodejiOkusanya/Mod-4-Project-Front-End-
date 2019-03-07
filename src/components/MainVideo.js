@@ -19,6 +19,10 @@ class MainVideo extends React.Component {
     width: "100%",
     height: "100%"
 }
+
+
+
+
     return (
       // <div class='ui inverted vertical masthead center aligned segment'>
         <div class='ui container' style={{...videoWrapperStyle}}>
@@ -41,6 +45,7 @@ class MainVideo extends React.Component {
           <div ui embed > */}
             {/* <iframe title='video player' src={videoSrc} autoplay allowfullscreen/> */}
             <iframe style={{...vidoeIframeStyle}} width="100%" height="100px" src={videoSrc} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+            {/* <button className="ui button inverted" onClick={this.likeMove}>Like Movie</button> */}
           </div>
         //   <div className='ui segment'>
         //     <h4 className='ui header'>{video.snippet.title}</h4>

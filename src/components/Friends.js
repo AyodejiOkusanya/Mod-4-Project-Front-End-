@@ -16,10 +16,11 @@ class Friends extends React.Component {
   }
 
   getFriendsMoviesFromDB = () => {
-    const friendmovieulr = `http://localhost:3000/myfriendsmovies/${
-      this.state.user_id
-    }`
-    return fetch(friendmovieulr)
+    const friendmovieulr = `http://localhost:3000/myfriendsmovies`
+    return fetch(friendmovieulr, {
+        method: 'POST',
+        headers: {"Authorization": localStorage.getItem("token")}
+    })
       .then(resp => resp.json())
       .then(friends => this.setState({ friends }))
   }
@@ -135,28 +136,9 @@ class Friends extends React.Component {
         </h2>
         <h1>Friends</h1>
         <div>{this.renderFriends()}</div>
-        <VideoList 
-        videos={this.props.videos}
-        selectAVideo={this.props.selectAVideo}
-        getVideosFromScroll={this.props.getVideosFromScroll}
-        hasMore={this.props.hasMore}
-        
-        />
       </div>
     )
   }
 }
 
 export default Friends
-
-
-
-{/* <Route exact path="/friends" component={() => <Friends 
-         videos={this.state.videos}
-         selectAVideo={this.selectAVideo}
-         getVideosFromScroll={this.getVideosFromScroll}
-         hasMore={this.state.hasMore}
-         
-         
-         />} 
-        /> */}
