@@ -30,6 +30,7 @@ class App extends React.Component {
   signout = () => {
     localStorage.removeItem("token");
     this.setState({ username: "" });
+    this.props.history.push("/")
   }
 
   componentDidMount () {
@@ -148,6 +149,7 @@ class App extends React.Component {
           searchTerm={this.state.searchTerm}
           searchForVideo={this.searchForVideo}
           handleSearchSubmit={this.handleSearchSubmit}
+          signOut={this.signout}
         />
         { this.showMovieDetailOrVideo() }
         <br />
